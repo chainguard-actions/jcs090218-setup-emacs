@@ -8,6 +8,7 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 
 | Version | Tag | Upstream commit |
 |---------|-----|-----------------|
+| v2 | [`v2`](https://github.com/chainguard-actions/jcs090218-setup-emacs/tree/v2) | [`c2e999a`](https://github.com/jcs090218/setup-emacs/commit/c2e999a18c9dbb0648b79344f462cbbeb5b1ae16) |
 | v3 | [`v3`](https://github.com/chainguard-actions/jcs090218-setup-emacs/tree/v3) | [`ffd830b`](https://github.com/jcs090218/setup-emacs/commit/ffd830bca5865932d99c3d179263d8b0ebdd00c0) |
 
 ## Privacy
