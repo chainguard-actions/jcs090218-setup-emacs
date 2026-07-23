@@ -1,0 +1,39 @@
+name: Test older Emacs version
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: setup-emacs
+        name: Set up Emacs 26.3
+        uses: .
+        with:
+          version: '26.3'
+      - name: Assert Emacs is installed
+        run: |
+          echo "Checking Emacs installation..."
+          if ! command -v emacs &>/dev/null; then
+            echo "FAIL: emacs command not found"
+            exit 1
+          fi
+          echo "PASS: emacs is installed"
+      - name: Assert Emacs version is correct
+        run: |
+          ACTUAL_VERSION=$(emacs --version | head -1)
+          echo "actual: $ACTUAL_VERSION"
+          if ! echo "$ACTUAL_VERSION" | grep -q "26.3"; then
+            echo "FAIL: expected Emacs 26.3 but got: $ACTUAL_VERSION"
+            exit 1
+          fi
+          echo "PASS: Emacs 26.3 is installed"
+      - name: Assert Emacs can evaluate basic Lisp
+        run: |
+          RESULT=$(emacs --batch --eval '(message "hello from emacs")' 2>&1)
+          echo "actual: $RESULT"
+          if ! echo "$RESULT" | grep -q "hello from emacs"; then
+            echo "FAIL: Emacs could not evaluate basic Lisp"
+            exit 1
+          fi
+          echo "PASS: Emacs can evaluate Lisp"

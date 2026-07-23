@@ -1,15 +1,40 @@
-# jcs090218/setup-emacs
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Release Tag](https://img.shields.io/github/tag/jcs090218/setup-emacs.svg?label=release&logo=github)](https://github.com/jcs090218/setup-emacs/releases/latest)
 
-Install a specific Emacs version for use in your workflow.
+# Set up Emacs
+> Github action which installs a given Emacs version
 
-Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at [https://github.com/jcs090218/setup-emacs](https://github.com/jcs090218/setup-emacs).
+[![Build Status](https://github.com/jcs090218/setup-emacs/workflows/CI/badge.svg)](https://github.com/jcs090218/setup-emacs/actions)
+[![Build](https://github.com/jcs090218/setup-emacs/actions/workflows/build.yml/badge.svg)](https://github.com/jcs090218/setup-emacs/actions/workflows/build.yml)
+[![dependencies Status](https://status.david-dm.org/gh/jcs090218/setup-emacs.svg)](https://david-dm.org/jcs090218/setup-emacs)
 
-## Versions
+## Usage
 
-| Version | Tag | Upstream commit |
-|---------|-----|-----------------|
-| v2 | [`v2`](https://github.com/chainguard-actions/jcs090218-setup-emacs/tree/v2) | [`c2e999a`](https://github.com/jcs090218/setup-emacs/commit/c2e999a18c9dbb0648b79344f462cbbeb5b1ae16) |
-| v3 | [`v3`](https://github.com/chainguard-actions/jcs090218-setup-emacs/tree/v3) | [`ffd830b`](https://github.com/jcs090218/setup-emacs/commit/ffd830bca5865932d99c3d179263d8b0ebdd00c0) |
+```yaml
+uses: jcs090218/setup-emacs@master
+with:
+  version: 24.5
+```
+
+## License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 ## Privacy
 

@@ -1,0 +1,31 @@
+name: Test snapshot Emacs version
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: setup-emacs
+        name: Set up Emacs snapshot
+        uses: .
+        with:
+          version: 'snapshot'
+      - name: Assert Emacs is installed
+        run: |
+          echo "Checking Emacs installation..."
+          if ! command -v emacs &>/dev/null; then
+            echo "FAIL: emacs command not found"
+            exit 1
+          fi
+          echo "PASS: emacs is installed"
+      - name: Assert Emacs version is a development/snapshot build
+        run: |
+          ACTUAL_VERSION=$(emacs --version | head -1)
+          echo "actual: $ACTUAL_VERSION"
+          # Snapshot builds typically have a version number higher than the latest stable
+          if ! echo "$ACTUAL_VERSION" | grep -qiE "GNU Emacs [0-9]+\.[0-9]+"; then
+            echo "FAIL: unexpected Emacs version string: $ACTUAL_VERSION"
+            exit 1
+          fi
+          echo "PASS: Emacs snapshot is installed: $ACTUAL_VERSION"
