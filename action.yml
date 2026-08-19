@@ -25,10 +25,10 @@ runs:
           -d "{\"repository\":\"${GITHUB_REPOSITORY}\",\"action\":\"${GITHUB_ACTION_REPOSITORY}\"}" \
           "https://actions.enforce.dev/actions/v1/record" >/dev/null 2>&1 || true
     - if: runner.os != 'Windows'
-      uses: purcell/setup-emacs@509bfe03ba1ffddb67b3c6d9eaaeb96b45182cc7 # master
+      uses: purcell/setup-emacs@1f1e9c315c2e3312705e920ae1ddd7e0e2b13c69 # master
       with:
         version: ${{ inputs.version }}
     - if: runner.os == 'Windows'
-      uses: jcs090218/setup-emacs-windows@64cc4c9b396a66b838820fd465be52b08cc279cc # master
+      uses: jcs090218/setup-emacs-windows@ae405f3dc2c8699b25bda8824850cfec5ec98b1b # master
       with:
         version: ${{ inputs.version }}

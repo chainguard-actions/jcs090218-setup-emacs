@@ -6,24 +6,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - id: setup-emacs
+      - id: setup
         uses: .
         with:
           version: "snapshot"
       - name: Assert emacs is installed
         run: |
-          echo "Checking emacs binary..."
-          if ! command -v emacs &>/dev/null; then
-            echo "FAIL: emacs binary not found in PATH"
+          echo "Checking emacs is on PATH..."
+          if ! command -v emacs >/dev/null 2>&1; then
+            echo "FAIL: emacs not found on PATH"
             exit 1
           fi
-          echo "PASS: emacs is installed"
+          echo "PASS: emacs found at $(command -v emacs)"
       - name: Assert emacs can run
         run: |
-          EMACS_VERSION=$(emacs --version | head -1)
-          echo "actual: $EMACS_VERSION"
-          if ! echo "$EMACS_VERSION" | grep -qi "emacs"; then
-            echo "FAIL: unexpected emacs version output: $EMACS_VERSION"
+          echo "Running emacs --version..."
+          ACTUAL_VERSION="$(emacs --version | head -1)"
+          echo "actual: $ACTUAL_VERSION"
+          if ! echo "$ACTUAL_VERSION" | grep -qi "emacs"; then
+            echo "FAIL: unexpected version output: $ACTUAL_VERSION"
             exit 1
           fi
-          echo "PASS: emacs snapshot is functional"
+          echo "PASS: emacs snapshot installed and functional"
