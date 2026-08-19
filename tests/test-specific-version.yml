@@ -1,0 +1,29 @@
+name: Test setup-emacs specific version
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: action
+        uses: .
+        with:
+          version: '27.2'
+      - name: Assert emacs is installed
+        run: |
+          echo "Checking emacs installation..."
+          if ! command -v emacs &>/dev/null; then
+            echo "FAIL: emacs command not found"
+            exit 1
+          fi
+          echo "PASS: emacs is installed"
+      - name: Assert emacs version
+        run: |
+          ACTUAL_VERSION=$(emacs --version | head -1)
+          echo "actual: $ACTUAL_VERSION"
+          if ! echo "$ACTUAL_VERSION" | grep -q "27.2"; then
+            echo "FAIL: expected emacs 27.2 but got: $ACTUAL_VERSION"
+            exit 1
+          fi
+          echo "PASS: emacs version matches 27.2"

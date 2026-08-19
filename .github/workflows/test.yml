@@ -1,0 +1,46 @@
+name: 'CI'
+
+on:
+  pull_request:
+  push:
+    paths-ignore:
+    - '**.md'
+    - '**.org'
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [linux-latest, macos-latest, windows-latest]
+        emacs_version: [23.4, 24.1, 24.2, 24.3, 24.4, 24.5, 25.1, 25.2, 25.3, 26.1, 26.2, 26.3, 27.1, 27.2, 28.1, snapshot]
+        exclude:
+          - os: macos-latest
+            emacs_version: 23.4
+          - os: macos-latest
+            emacs_version: 24.1
+          - os: macos-latest
+            emacs_version: 24.2
+
+    steps:
+    - uses: actions/checkout@0717577d45739eb3c851188b29f50ed6c0b2194e # v2
+
+    - run: npm ci
+    - run: npm run build
+
+    - uses: ./
+      with:
+        version: ${{ matrix.emacs_version }}
+
+    - name: Check emacs version
+      run: emacs --version
